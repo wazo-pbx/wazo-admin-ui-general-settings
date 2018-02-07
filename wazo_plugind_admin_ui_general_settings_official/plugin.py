@@ -8,7 +8,8 @@ from wazo_admin_ui.helpers.plugin import create_blueprint
 from .service import GeneralSettingsService
 from .view import (
     SipGeneralSettingsView,
-    IaxGeneralSettingsView
+    IaxGeneralSettingsView,
+    SccpGeneralSettingsView
 )
 
 general_settings = create_blueprint('general_settings', __name__)
@@ -26,5 +27,9 @@ class Plugin(object):
         IaxGeneralSettingsView.service = GeneralSettingsService()
         IaxGeneralSettingsView.register(general_settings, route_base='/iax_general_settings')
         register_flaskview(general_settings, IaxGeneralSettingsView)
+
+        SccpGeneralSettingsView.service = GeneralSettingsService()
+        SccpGeneralSettingsView.register(general_settings, route_base='/sccp_general_settings')
+        register_flaskview(general_settings, SccpGeneralSettingsView)
 
         core.register_blueprint(general_settings)

@@ -17,7 +17,8 @@ from wazo_admin_ui.helpers.classful import BaseView, flash_basic_form_errors
 
 from .form import (
     SipGeneralSettingsForm,
-    IaxGeneralSettingsForm
+    IaxGeneralSettingsForm,
+    SccpGeneralSettingsForm
 )
 
 class BaseGeneralSettingsView(BaseView):
@@ -89,5 +90,15 @@ class IaxGeneralSettingsView(BaseGeneralSettingsView):
     settings = 'iax_general'
 
     @classy_menu_item('.advanced.iax_general_settings', l_('IAX General Settings'), order=5, icon="asterisk")
+    def index(self, form=None):
+        return super().index(form)
+
+
+class SccpGeneralSettingsView(BaseGeneralSettingsView):
+    form = SccpGeneralSettingsForm
+    resource = 'sccp_general_settings'
+    settings = 'sccp_general'
+
+    @classy_menu_item('.advanced.sccp_general_settings', l_('SCCP General Settings'), order=6, icon="asterisk")
     def index(self, form=None):
         return super().index(form)

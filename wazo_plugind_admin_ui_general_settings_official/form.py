@@ -33,3 +33,7 @@ class SipGeneralSettingsForm(GeneralSettingsOptionsForm):
 
 class IaxGeneralSettingsForm(GeneralSettingsOptionsForm):
     pass
+
+
+class SccpGeneralSettingsForm(GeneralSettingsOptionsForm):
+    pass

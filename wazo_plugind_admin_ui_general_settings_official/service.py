@@ -19,3 +19,9 @@ class GeneralSettingsService(object):
     def update_iax_general(self, iax_general):
         iax_general['ordered_options'] = self.get_iax_general()['ordered_options']
         return confd.iax_general.update(iax_general)
+
+    def get_sccp_general(self):
+        return confd.sccp_general.get()
+
+    def update_sccp_general(self, sccp_general):
+        return confd.sccp_general.update(sccp_general)
