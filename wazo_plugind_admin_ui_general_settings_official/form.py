@@ -37,3 +37,7 @@ class IaxGeneralSettingsForm(GeneralSettingsOptionsForm):
 
 class SccpGeneralSettingsForm(GeneralSettingsOptionsForm):
     pass
+
+
+class VoicemailGeneralSettingsForm(GeneralSettingsOptionsForm):
+    pass

@@ -18,7 +18,8 @@ from wazo_admin_ui.helpers.classful import BaseView, flash_basic_form_errors
 from .form import (
     SipGeneralSettingsForm,
     IaxGeneralSettingsForm,
-    SccpGeneralSettingsForm
+    SccpGeneralSettingsForm,
+    VoicemailGeneralSettingsForm
 )
 
 class BaseGeneralSettingsView(BaseView):
@@ -100,5 +101,15 @@ class SccpGeneralSettingsView(BaseGeneralSettingsView):
     settings = 'sccp_general'
 
     @classy_menu_item('.advanced.sccp_general_settings', l_('SCCP General Settings'), order=6, icon="asterisk")
+    def index(self, form=None):
+        return super().index(form)
+
+
+class VoicemailGeneralSettingsView(BaseGeneralSettingsView):
+    form = VoicemailGeneralSettingsForm
+    resource = 'voicemail_general_settings'
+    settings = 'voicemail_general'
+
+    @classy_menu_item('.advanced.voicemail_general_settings', l_('Voicemail General Settings'), order=7, icon="asterisk")
     def index(self, form=None):
         return super().index(form)

@@ -25,3 +25,9 @@ class GeneralSettingsService(object):
 
     def update_sccp_general(self, sccp_general):
         return confd.sccp_general.update(sccp_general)
+
+    def get_voicemail_general(self):
+        return confd.voicemail_general.get()
+
+    def update_voicemail_general(self, voicemail_general):
+        return confd.voicemail_general.update(voicemail_general)
