@@ -15,8 +15,10 @@ from requests.exceptions import HTTPError
 
 from wazo_admin_ui.helpers.classful import BaseView, flash_basic_form_errors
 
-from .form import SipGeneralSettingsForm
-
+from .form import (
+    SipGeneralSettingsForm,
+    IaxGeneralSettingsForm
+)
 
 class BaseGeneralSettingsView(BaseView):
     settings = None
@@ -77,5 +79,15 @@ class SipGeneralSettingsView(BaseGeneralSettingsView):
     settings = 'sip_general'
 
     @classy_menu_item('.advanced.sip_general_settings', l_('SIP General Settings'), order=4, icon="asterisk")
+    def index(self, form=None):
+        return super().index(form)
+
+
+class IaxGeneralSettingsView(BaseGeneralSettingsView):
+    form = IaxGeneralSettingsForm
+    resource = 'iax_general_settings'
+    settings = 'iax_general'
+
+    @classy_menu_item('.advanced.iax_general_settings', l_('IAX General Settings'), order=5, icon="asterisk")
     def index(self, form=None):
         return super().index(form)

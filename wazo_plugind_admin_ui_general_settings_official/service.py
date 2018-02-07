@@ -12,3 +12,10 @@ class GeneralSettingsService(object):
     def update_sip_general(self, sip_general):
         sip_general['ordered_options'] = self.get_sip_general()['ordered_options']
         return confd.sip_general.update(sip_general)
+
+    def get_iax_general(self):
+        return confd.iax_general.get()
+
+    def update_iax_general(self, iax_general):
+        iax_general['ordered_options'] = self.get_iax_general()['ordered_options']
+        return confd.iax_general.update(iax_general)
