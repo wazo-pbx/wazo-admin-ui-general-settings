@@ -22,6 +22,7 @@ from .form import (
     VoicemailGeneralSettingsForm
 )
 
+
 class BaseGeneralSettingsView(BaseView):
     settings = None
 

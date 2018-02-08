@@ -27,7 +27,16 @@ class GeneralSettingsService(object):
         return confd.sccp_general.update(sccp_general)
 
     def get_voicemail_general(self):
-        return confd.voicemail_general.get()
+        resource = confd.voicemail_general.get()
+        resource['zonemessages'] = self.get_voicemail_zonemessages()['items']
+        return resource
 
     def update_voicemail_general(self, voicemail_general):
+        self.update_voicemail_zonemessages({'items': voicemail_general['zonemessages']})
         return confd.voicemail_general.update(voicemail_general)
+
+    def get_voicemail_zonemessages(self):
+        return confd.voicemail_zonemessages.get()
+
+    def update_voicemail_zonemessages(self, voicemail_zonemessages):
+        return confd.voicemail_zonemessages.update(voicemail_zonemessages)
