@@ -19,7 +19,8 @@ from .form import (
     SipGeneralSettingsForm,
     IaxGeneralSettingsForm,
     SccpGeneralSettingsForm,
-    VoicemailGeneralSettingsForm
+    VoicemailGeneralSettingsForm,
+    FeaturesGeneralSettingsForm
 )
 
 
@@ -111,6 +112,17 @@ class VoicemailGeneralSettingsView(BaseGeneralSettingsView):
     resource = 'voicemail_general_settings'
     settings = 'voicemail_general'
 
-    @classy_menu_item('.advanced.voicemail_general_settings', l_('Voicemail General Settings'), order=7, icon="asterisk")
+    @classy_menu_item('.advanced.voicemail_general_settings', l_('Voicemail General Settings'), order=7,
+                      icon="asterisk")
+    def index(self, form=None):
+        return super().index(form)
+
+
+class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
+    form = FeaturesGeneralSettingsForm
+    resource = 'features_general_settings'
+    settings = 'features_general'
+
+    @classy_menu_item('.advanced.features_general_settings', l_('Features General Settings'), order=8, icon="asterisk")
     def index(self, form=None):
         return super().index(form)

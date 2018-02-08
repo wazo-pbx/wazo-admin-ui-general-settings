@@ -10,7 +10,8 @@ from .view import (
     SipGeneralSettingsView,
     IaxGeneralSettingsView,
     SccpGeneralSettingsView,
-    VoicemailGeneralSettingsView
+    VoicemailGeneralSettingsView,
+    FeaturesGeneralSettingsView
 )
 
 general_settings = create_blueprint('general_settings', __name__)
@@ -36,5 +37,9 @@ class Plugin(object):
         VoicemailGeneralSettingsView.service = GeneralSettingsService()
         VoicemailGeneralSettingsView.register(general_settings, route_base='/voicemail_general_settings')
         register_flaskview(general_settings, VoicemailGeneralSettingsView)
+
+        FeaturesGeneralSettingsView.service = GeneralSettingsService()
+        FeaturesGeneralSettingsView.register(general_settings, route_base='/features_general_settings')
+        register_flaskview(general_settings, FeaturesGeneralSettingsView)
 
         core.register_blueprint(general_settings)

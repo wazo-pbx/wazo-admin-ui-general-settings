@@ -59,3 +59,7 @@ class VoicemailZonemessages(BaseForm):
 
 class VoicemailGeneralSettingsForm(GeneralSettingsOptionsForm):
     zonemessages = FieldList(FormField(VoicemailZonemessages))
+
+
+class FeaturesGeneralSettingsForm(GeneralSettingsOptionsForm):
+    pass

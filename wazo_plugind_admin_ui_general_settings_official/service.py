@@ -40,3 +40,9 @@ class GeneralSettingsService(object):
 
     def update_voicemail_zonemessages(self, voicemail_zonemessages):
         return confd.voicemail_zonemessages.update(voicemail_zonemessages)
+
+    def get_features_general(self):
+        return confd.features_general.get()
+
+    def update_features_general(self, features_general):
+        return confd.features_general.update(features_general)
