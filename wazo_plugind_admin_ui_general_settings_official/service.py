@@ -42,7 +42,16 @@ class GeneralSettingsService(object):
         return confd.voicemail_zonemessages.update(voicemail_zonemessages)
 
     def get_features_general(self):
-        return confd.features_general.get()
+        resource = confd.features_general.get()
+        resource['featuremap'] = self.get_features_featuremap_general()['options']
+        return resource
 
     def update_features_general(self, features_general):
+        self.update_features_featuremap_general({'options': features_general['featuremap']})
         return confd.features_general.update(features_general)
+
+    def get_features_featuremap_general(self):
+        return confd.features_featuremap.get()
+
+    def update_features_featuremap_general(self, features_featuremap):
+        return confd.features_featuremap.update(features_featuremap)

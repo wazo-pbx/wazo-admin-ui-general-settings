@@ -126,3 +126,15 @@ class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
     @classy_menu_item('.advanced.features_general_settings', l_('Features General Settings'), order=8, icon="asterisk")
     def index(self, form=None):
         return super().index(form)
+
+    def _map_resources_to_form(self, resource):
+        resource['options'] = self._build_options(resource['options'])
+        resource['featuremap'] = self._build_options(resource['featuremap'])
+        form = self.form(data=resource)
+        return form
+
+    def _map_form_to_resources(self, form, form_id=None):
+        data = form.to_dict()
+        data['options'] = self._map_options_to_resource(data['options'])
+        data['featuremap'] = self._map_options_to_resource(data['featuremap'])
+        return data

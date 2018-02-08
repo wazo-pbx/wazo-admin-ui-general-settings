@@ -62,4 +62,4 @@ class VoicemailGeneralSettingsForm(GeneralSettingsOptionsForm):
 
 
 class FeaturesGeneralSettingsForm(GeneralSettingsOptionsForm):
-    pass
+    featuremap = FieldList(FormField(OptionsForm))
