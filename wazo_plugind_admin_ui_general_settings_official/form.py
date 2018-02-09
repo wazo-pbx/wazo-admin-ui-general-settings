@@ -9,7 +9,7 @@ from wtforms.fields import (
     StringField,
     SubmitField
 )
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, IPAddress
 
 from wazo_admin_ui.helpers.form import BaseForm
 
@@ -32,8 +32,14 @@ class SipGeneralSettingsForm(GeneralSettingsOptionsForm):
     pass
 
 
+class IaxCallnumberlimitsForm(BaseForm):
+    ip_address = StringField(l_('IP Address'), validators=[IPAddress()])
+    netmask = StringField(l_('Netmask'))
+    limit = StringField(l_('Limit'))
+
+
 class IaxGeneralSettingsForm(GeneralSettingsOptionsForm):
-    pass
+    callnumberlimits = FieldList(FormField(IaxCallnumberlimitsForm))
 
 
 class SccpGeneralSettingsForm(GeneralSettingsOptionsForm):

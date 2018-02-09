@@ -14,11 +14,20 @@ class GeneralSettingsService(object):
         confd.sip_general.update(sip_general)
 
     def get_iax_general(self):
-        return confd.iax_general.get()
+        resource = confd.iax_general.get()
+        resource['callnumberlimits'] = self.get_iax_callnumberlimits_general()['items']
+        return resource
 
     def update_iax_general(self, iax_general):
+        self.update_iax_callnumberlimits_general({'items': iax_general['callnumberlimits']})
         iax_general['ordered_options'] = self.get_iax_general()['ordered_options']
         confd.iax_general.update(iax_general)
+
+    def get_iax_callnumberlimits_general(self):
+        return confd.iax_callnumberlimits.get()
+
+    def update_iax_callnumberlimits_general(self, iax_callnumberlimits):
+        confd.iax_callnumberlimits.update(iax_callnumberlimits)
 
     def get_sccp_general(self):
         return confd.sccp_general.get()
