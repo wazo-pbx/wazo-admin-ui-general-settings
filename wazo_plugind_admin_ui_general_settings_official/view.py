@@ -130,6 +130,7 @@ class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
     def _map_resources_to_form(self, resource):
         resource['options'] = self._build_options(resource['options'])
         resource['featuremap'] = self._build_options(resource['featuremap'])
+        resource['applicationmap'] = self._build_options(resource['applicationmap'])
         form = self.form(data=resource)
         return form
 
@@ -137,4 +138,5 @@ class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
         data = form.to_dict()
         data['options'] = self._map_options_to_resource(data['options'])
         data['featuremap'] = self._map_options_to_resource(data['featuremap'])
+        data['applicationmap'] = self._map_options_to_resource(data['applicationmap'])
         return data

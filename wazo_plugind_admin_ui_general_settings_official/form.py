@@ -63,3 +63,4 @@ class VoicemailGeneralSettingsForm(GeneralSettingsOptionsForm):
 
 class FeaturesGeneralSettingsForm(GeneralSettingsOptionsForm):
     featuremap = FieldList(FormField(OptionsForm))
+    applicationmap = FieldList(FormField(OptionsForm))

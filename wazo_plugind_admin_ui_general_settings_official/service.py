@@ -44,10 +44,12 @@ class GeneralSettingsService(object):
     def get_features_general(self):
         resource = confd.features_general.get()
         resource['featuremap'] = self.get_features_featuremap_general()['options']
+        resource['applicationmap'] = self.get_features_applicationmap_general()['options']
         return resource
 
     def update_features_general(self, features_general):
         self.update_features_featuremap_general({'options': features_general['featuremap']})
+        self.update_features_applicationmap_general({'options': features_general['applicationmap']})
         return confd.features_general.update(features_general)
 
     def get_features_featuremap_general(self):
@@ -55,3 +57,9 @@ class GeneralSettingsService(object):
 
     def update_features_featuremap_general(self, features_featuremap):
         return confd.features_featuremap.update(features_featuremap)
+
+    def get_features_applicationmap_general(self):
+        return confd.features_applicationmap.get()
+
+    def update_features_applicationmap_general(self, features_applicationmap):
+        return confd.features_applicationmap.update(features_applicationmap)

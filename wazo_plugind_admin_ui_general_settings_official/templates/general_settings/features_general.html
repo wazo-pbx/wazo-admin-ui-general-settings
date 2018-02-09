@@ -11,6 +11,7 @@
         {% call build_tabs_navigation() %}
           {{ add_tab_navigation_item('general', _('General'), active=True) }}
           {{ add_tab_navigation_item('featuremap', _('Featuremap')) }}
+          {{ add_tab_navigation_item('applicationmap', _('Applicationmap')) }}
         {% endcall %}
 
         {% call build_form(action=url_for('.FeaturesGeneralSettingsView:put')) %}
@@ -59,6 +60,32 @@
                     {{ _build_option_entry(form.featuremap.pop_entry(), template=True) }}
 
                     {% for option in form.featuremap %}
+                      {{ _build_option_entry(option) }}
+                    {% endfor %}
+                  {% endcall %}
+
+                {% endcall %}
+
+              {% endcall %}
+            {% endcall %}
+
+            {% call build_tab_content_item('applicationmap') %}
+              {% call add_default_fields(form=form, submit_value=_('Update')) %}
+
+                {{ build_add_row_entry_header() }}
+                {% call build_table() %}
+
+                  {% call build_table_headers() %}
+                    <th>{{  _('Option Key') }}</th>
+                    <th>{{  _('Option Value') }}</th>
+                    <th style="width: 21px"></th>
+                  {% endcall %}
+
+                  {% call build_table_body(class_='dynamic-table') %}
+                    {% do form.applicationmap.append_entry() %}
+                    {{ _build_option_entry(form.applicationmap.pop_entry(), template=True) }}
+
+                    {% for option in form.applicationmap %}
                       {{ _build_option_entry(option) }}
                     {% endfor %}
                   {% endcall %}
