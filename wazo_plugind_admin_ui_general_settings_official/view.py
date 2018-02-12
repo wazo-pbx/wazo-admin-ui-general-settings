@@ -19,15 +19,17 @@ from .form import (
     SipGeneralSettingsForm,
     IaxGeneralSettingsForm,
     SccpGeneralSettingsForm,
-    VoicemailGeneralSettingsForm
+    VoicemailGeneralSettingsForm,
+    FeaturesGeneralSettingsForm
 )
+
 
 class BaseGeneralSettingsView(BaseView):
     settings = None
 
     def index(self, form=None):
         try:
-            resource = getattr(self.service, 'get_{}'.format(self.settings))()
+            resource = self.service.get()
         except HTTPError as error:
             self._flash_http_error(error)
             return redirect(url_for('admin.Admin:get'))
@@ -47,8 +49,7 @@ class BaseGeneralSettingsView(BaseView):
 
         resources = self._map_form_to_resources(form)
         try:
-            update_func = getattr(self.service, 'update_{}'.format(self.settings))
-            update_func(resources)
+            self.service.update(resources)
         except HTTPError as error:
             form = self._fill_form_error(form, error)
             self._flash_http_error(error)
@@ -110,6 +111,31 @@ class VoicemailGeneralSettingsView(BaseGeneralSettingsView):
     resource = 'voicemail_general_settings'
     settings = 'voicemail_general'
 
-    @classy_menu_item('.advanced.voicemail_general_settings', l_('Voicemail General Settings'), order=7, icon="asterisk")
+    @classy_menu_item('.advanced.voicemail_general_settings', l_('Voicemail General Settings'), order=7,
+                      icon="asterisk")
     def index(self, form=None):
         return super().index(form)
+
+
+class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
+    form = FeaturesGeneralSettingsForm
+    resource = 'features_general_settings'
+    settings = 'features_general'
+
+    @classy_menu_item('.advanced.features_general_settings', l_('Features General Settings'), order=8, icon="asterisk")
+    def index(self, form=None):
+        return super().index(form)
+
+    def _map_resources_to_form(self, resource):
+        resource['options'] = self._build_options(resource['options'])
+        resource['featuremap'] = self._build_options(resource['featuremap'])
+        resource['applicationmap'] = self._build_options(resource['applicationmap'])
+        form = self.form(data=resource)
+        return form
+
+    def _map_form_to_resources(self, form, form_id=None):
+        data = form.to_dict()
+        data['options'] = self._map_options_to_resource(data['options'])
+        data['featuremap'] = self._map_options_to_resource(data['featuremap'])
+        data['applicationmap'] = self._map_options_to_resource(data['applicationmap'])
+        return data

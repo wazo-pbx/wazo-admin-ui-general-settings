@@ -5,12 +5,19 @@ from flask_menu.classy import register_flaskview
 
 from wazo_admin_ui.helpers.plugin import create_blueprint
 
-from .service import GeneralSettingsService
+from .service import (
+    SipGeneralSettingsService,
+    IaxGeneralSettingsService,
+    SccpGeneralSettingsService,
+    VoicemailGeneralSettingsService,
+    FeaturesGeneralSettingsService
+)
 from .view import (
     SipGeneralSettingsView,
     IaxGeneralSettingsView,
     SccpGeneralSettingsView,
-    VoicemailGeneralSettingsView
+    VoicemailGeneralSettingsView,
+    FeaturesGeneralSettingsView
 )
 
 general_settings = create_blueprint('general_settings', __name__)
@@ -21,20 +28,24 @@ class Plugin(object):
     def load(self, dependencies):
         core = dependencies['flask']
 
-        SipGeneralSettingsView.service = GeneralSettingsService()
+        SipGeneralSettingsView.service = SipGeneralSettingsService()
         SipGeneralSettingsView.register(general_settings, route_base='/sip_general_settings')
         register_flaskview(general_settings, SipGeneralSettingsView)
 
-        IaxGeneralSettingsView.service = GeneralSettingsService()
+        IaxGeneralSettingsView.service = IaxGeneralSettingsService()
         IaxGeneralSettingsView.register(general_settings, route_base='/iax_general_settings')
         register_flaskview(general_settings, IaxGeneralSettingsView)
 
-        SccpGeneralSettingsView.service = GeneralSettingsService()
+        SccpGeneralSettingsView.service = SccpGeneralSettingsService()
         SccpGeneralSettingsView.register(general_settings, route_base='/sccp_general_settings')
         register_flaskview(general_settings, SccpGeneralSettingsView)
 
-        VoicemailGeneralSettingsView.service = GeneralSettingsService()
+        VoicemailGeneralSettingsView.service = VoicemailGeneralSettingsService()
         VoicemailGeneralSettingsView.register(general_settings, route_base='/voicemail_general_settings')
         register_flaskview(general_settings, VoicemailGeneralSettingsView)
+
+        FeaturesGeneralSettingsView.service = FeaturesGeneralSettingsService()
+        FeaturesGeneralSettingsView.register(general_settings, route_base='/features_general_settings')
+        register_flaskview(general_settings, FeaturesGeneralSettingsView)
 
         core.register_blueprint(general_settings)

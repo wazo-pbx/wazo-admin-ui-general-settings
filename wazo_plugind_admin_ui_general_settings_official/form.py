@@ -5,10 +5,11 @@ from flask_babel import lazy_gettext as l_
 from wtforms.fields import (
     FieldList,
     FormField,
+    SelectField,
     StringField,
     SubmitField
 )
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, IPAddress
 
 from wazo_admin_ui.helpers.form import BaseForm
 
@@ -31,13 +32,41 @@ class SipGeneralSettingsForm(GeneralSettingsOptionsForm):
     pass
 
 
+class IaxCallnumberlimitsForm(BaseForm):
+    ip_address = StringField(l_('IP Address'), validators=[IPAddress()])
+    netmask = StringField(l_('Netmask'))
+    limit = StringField(l_('Limit'))
+
+
 class IaxGeneralSettingsForm(GeneralSettingsOptionsForm):
-    pass
+    callnumberlimits = FieldList(FormField(IaxCallnumberlimitsForm))
 
 
 class SccpGeneralSettingsForm(GeneralSettingsOptionsForm):
     pass
 
 
+class VoicemailZonemessages(BaseForm):
+    name = StringField(l_('Name'))
+    timezone = SelectField(l_('Timezone'),
+                           validators=[InputRequired()],
+                           choices=[
+                               ('America/St_Johns', 'America/St_Johns'),
+                               ('America/Halifax', 'America/Halifax'),
+                               ('America/New_York', 'America/New_York'),
+                               ('America/Chicago', 'America/Chicago'),
+                               ('America/Denver', 'America/Denver'),
+                               ('America/Los_Angeles', 'America/Los_Angeles'),
+                               ('America/Anchorage', 'America/Anchorage'),
+                               ('Europe/Paris', 'Europe/Paris')
+                           ])
+    message = StringField(l_('Message'))
+
+
 class VoicemailGeneralSettingsForm(GeneralSettingsOptionsForm):
-    pass
+    zonemessages = FieldList(FormField(VoicemailZonemessages))
+
+
+class FeaturesGeneralSettingsForm(GeneralSettingsOptionsForm):
+    featuremap = FieldList(FormField(OptionsForm))
+    applicationmap = FieldList(FormField(OptionsForm))

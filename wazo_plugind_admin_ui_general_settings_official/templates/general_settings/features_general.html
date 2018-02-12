@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content_header %}
-  {{ build_breadcrumb(_('IAX General Settings'), '', 'asterisk', [_('Edit')]) }}
+  {{ build_breadcrumb(_('Features General Settings'), '', 'asterisk', [_('Edit')]) }}
 {% endblock %}
 
 {% block content %}
@@ -10,10 +10,11 @@
       {% call build_form_tabs_box() %}
         {% call build_tabs_navigation() %}
           {{ add_tab_navigation_item('general', _('General'), active=True) }}
-          {{ add_tab_navigation_item('callnumberlimits', _('Call Number Limits')) }}
+          {{ add_tab_navigation_item('featuremap', _('Featuremap')) }}
+          {{ add_tab_navigation_item('applicationmap', _('Applicationmap')) }}
         {% endcall %}
 
-        {% call build_form(action=url_for('.IaxGeneralSettingsView:put')) %}
+        {% call build_form(action=url_for('.FeaturesGeneralSettingsView:put')) %}
           {% call build_tabs_content() %}
 
             {% call build_tab_content_item('general', active=True) %}
@@ -42,25 +43,50 @@
               {% endcall %}
             {% endcall %}
 
-            {% call build_tab_content_item('callnumberlimits') %}
+            {% call build_tab_content_item('featuremap') %}
               {% call add_default_fields(form=form, submit_value=_('Update')) %}
 
                 {{ build_add_row_entry_header() }}
                 {% call build_table() %}
 
                   {% call build_table_headers() %}
-                    <th>{{  _('Ip Address') }}</th>
-                    <th>{{  _('Netmask') }}</th>
-                    <th>{{  _('Limit') }}</th>
+                    <th>{{  _('Option Key') }}</th>
+                    <th>{{  _('Option Value') }}</th>
                     <th style="width: 21px"></th>
                   {% endcall %}
 
                   {% call build_table_body(class_='dynamic-table') %}
-                    {% do form.callnumberlimits.append_entry() %}
-                    {{ _build_callnumberlimits_entry(form.callnumberlimits.pop_entry(), template=True) }}
+                    {% do form.featuremap.append_entry() %}
+                    {{ _build_option_entry(form.featuremap.pop_entry(), template=True) }}
 
-                    {% for callnumberlimit in form.callnumberlimits %}
-                      {{ _build_callnumberlimits_entry(callnumberlimit) }}
+                    {% for option in form.featuremap %}
+                      {{ _build_option_entry(option) }}
+                    {% endfor %}
+                  {% endcall %}
+
+                {% endcall %}
+
+              {% endcall %}
+            {% endcall %}
+
+            {% call build_tab_content_item('applicationmap') %}
+              {% call add_default_fields(form=form, submit_value=_('Update')) %}
+
+                {{ build_add_row_entry_header() }}
+                {% call build_table() %}
+
+                  {% call build_table_headers() %}
+                    <th>{{  _('Option Key') }}</th>
+                    <th>{{  _('Option Value') }}</th>
+                    <th style="width: 21px"></th>
+                  {% endcall %}
+
+                  {% call build_table_body(class_='dynamic-table') %}
+                    {% do form.applicationmap.append_entry() %}
+                    {{ _build_option_entry(form.applicationmap.pop_entry(), template=True) }}
+
+                    {% for option in form.applicationmap %}
+                      {{ _build_option_entry(option) }}
                     {% endfor %}
                   {% endcall %}
 
@@ -87,21 +113,6 @@
   <tr class="{{ tr_class }}">
     <td>{{ render_field(option.option_key, with_label=False) }}</td>
     <td>{{ render_field(option.option_value, with_label=False) }}</td>
-    <td>{{ add_delete_entry_button() }}</td>
-  </tr>
-{% endmacro %}
-
-
-{% macro _build_callnumberlimits_entry(callnumberlimit, template=False) %}
-  {% if template %}
-    {% set tr_class = "row-template hidden" %}
-  {% else %}
-    {% set tr_class = "row-line" %}
-  {% endif %}
-  <tr class="{{ tr_class }}">
-    <td>{{ render_field(callnumberlimit.ip_address, with_label=False) }}</td>
-    <td>{{ render_field(callnumberlimit.netmask, with_label=False) }}</td>
-    <td>{{ render_field(callnumberlimit.limit, with_label=False) }}</td>
     <td>{{ add_delete_entry_button() }}</td>
   </tr>
 {% endmacro %}
