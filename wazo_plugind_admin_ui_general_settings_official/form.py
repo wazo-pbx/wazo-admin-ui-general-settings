@@ -48,7 +48,7 @@ class SccpGeneralSettingsForm(GeneralSettingsOptionsForm):
 
 class VoicemailZonemessages(BaseForm):
     name = StringField(l_('Name'))
-    timezone = SelectField('Timezone',
+    timezone = SelectField(l_('Timezone'),
                            validators=[InputRequired()],
                            choices=[
                                ('America/St_Johns', 'America/St_Johns'),
