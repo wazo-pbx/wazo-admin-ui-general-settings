@@ -29,7 +29,7 @@ class BaseGeneralSettingsView(BaseView):
 
     def index(self, form=None):
         try:
-            resource = getattr(self.service, 'get_{}'.format(self.settings))()
+            resource = self.service.get()
         except HTTPError as error:
             self._flash_http_error(error)
             return redirect(url_for('admin.Admin:get'))
@@ -49,8 +49,7 @@ class BaseGeneralSettingsView(BaseView):
 
         resources = self._map_form_to_resources(form)
         try:
-            update_func = getattr(self.service, 'update_{}'.format(self.settings))
-            update_func(resources)
+            self.service.update(resources)
         except HTTPError as error:
             form = self._fill_form_error(form, error)
             self._flash_http_error(error)
