@@ -95,6 +95,16 @@ class IaxGeneralSettingsView(BaseGeneralSettingsView):
     def index(self, form=None):
         return super().index(form)
 
+    def _map_resources_to_form(self, resource):
+        resource['general']['options'] = self._build_options(resource['general']['options'])
+        form = self.form(data=resource)
+        return form
+
+    def _map_form_to_resources(self, form, form_id=None):
+        data = form.to_dict()
+        data['general']['options'] = self._map_options_to_resource(data['general']['options'])
+        return data
+
 
 class SccpGeneralSettingsView(BaseGeneralSettingsView):
     form = SccpGeneralSettingsForm
@@ -116,6 +126,16 @@ class VoicemailGeneralSettingsView(BaseGeneralSettingsView):
     def index(self, form=None):
         return super().index(form)
 
+    def _map_resources_to_form(self, resource):
+        resource['general']['options'] = self._build_options(resource['general']['options'])
+        form = self.form(data=resource)
+        return form
+
+    def _map_form_to_resources(self, form, form_id=None):
+        data = form.to_dict()
+        data['general']['options'] = self._map_options_to_resource(data['general']['options'])
+        return data
+
 
 class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
     form = FeaturesGeneralSettingsForm
@@ -127,15 +147,15 @@ class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
         return super().index(form)
 
     def _map_resources_to_form(self, resource):
-        resource['options'] = self._build_options(resource['options'])
-        resource['featuremap'] = self._build_options(resource['featuremap'])
-        resource['applicationmap'] = self._build_options(resource['applicationmap'])
+        resource['general']['options'] = self._build_options(resource['general']['options'])
+        resource['featuremap']['options'] = self._build_options(resource['featuremap']['options'])
+        resource['applicationmap']['options'] = self._build_options(resource['applicationmap']['options'])
         form = self.form(data=resource)
         return form
 
     def _map_form_to_resources(self, form, form_id=None):
         data = form.to_dict()
-        data['options'] = self._map_options_to_resource(data['options'])
-        data['featuremap'] = self._map_options_to_resource(data['featuremap'])
-        data['applicationmap'] = self._map_options_to_resource(data['applicationmap'])
+        data['general']['options'] = self._map_options_to_resource(data['general']['options'])
+        data['featuremap']['options'] = self._map_options_to_resource(data['featuremap']['options'])
+        data['applicationmap']['options'] = self._map_options_to_resource(data['applicationmap']['options'])
         return data
