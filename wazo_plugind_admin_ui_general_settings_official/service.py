@@ -10,7 +10,7 @@ class SipGeneralSettingsService(object):
         return confd.sip_general.get()
 
     def update(self, sip_general):
-        sip_general['ordered_options'] = self.get()['ordered_options']
+        sip_general['ordered_options'] = confd.sip_general.get()['ordered_options']
         confd.sip_general.update(sip_general)
 
 
@@ -18,19 +18,13 @@ class IaxGeneralSettingsService(object):
 
     def get(self):
         resource = confd.iax_general.get()
-        resource['callnumberlimits'] = self.get_iax_callnumberlimits_general()['items']
+        resource['callnumberlimits'] = confd.iax_callnumberlimits.get()['items']
         return resource
 
     def update(self, iax_general):
-        self.update_iax_callnumberlimits_general({'items': iax_general['callnumberlimits']})
-        iax_general['ordered_options'] = self.get()['ordered_options']
+        confd.iax_callnumberlimits.update({'items': iax_general['callnumberlimits']})
+        iax_general['ordered_options'] = confd.iax_general.get()['ordered_options']
         confd.iax_general.update(iax_general)
-
-    def get_iax_callnumberlimits_general(self):
-        return confd.iax_callnumberlimits.get()
-
-    def update_iax_callnumberlimits_general(self, iax_callnumberlimits):
-        confd.iax_callnumberlimits.update(iax_callnumberlimits)
 
 
 class SccpGeneralSettingsService(object):
@@ -46,41 +40,23 @@ class VoicemailGeneralSettingsService(object):
 
     def get(self):
         resource = confd.voicemail_general.get()
-        resource['zonemessages'] = self.get_voicemail_zonemessages()['items']
+        resource['zonemessages'] = confd.voicemail_zonemessages.get()['items']
         return resource
 
     def update(self, voicemail_general):
-        self.update_voicemail_zonemessages({'items': voicemail_general['zonemessages']})
+        confd.voicemail_zonemessages.update({'items': voicemail_general['zonemessages']})
         confd.voicemail_general.update(voicemail_general)
-
-    def get_voicemail_zonemessages(self):
-        return confd.voicemail_zonemessages.get()
-
-    def update_voicemail_zonemessages(self, voicemail_zonemessages):
-        confd.voicemail_zonemessages.update(voicemail_zonemessages)
 
 
 class FeaturesGeneralSettingsService(object):
 
     def get(self):
         resource = confd.features_general.get()
-        resource['featuremap'] = self.get_features_featuremap_general()['options']
-        resource['applicationmap'] = self.get_features_applicationmap_general()['options']
+        resource['featuremap'] = confd.features_featuremap.get()['options']
+        resource['applicationmap'] = confd.features_applicationmap.get()['options']
         return resource
 
     def update(self, features_general):
-        self.update_features_featuremap_general({'options': features_general['featuremap']})
-        self.update_features_applicationmap_general({'options': features_general['applicationmap']})
+        confd.features_featuremap.update({'options': features_general['featuremap']})
+        confd.features_applicationmap.update({'options': features_general['applicationmap']})
         confd.features_general.update(features_general)
-
-    def get_features_featuremap_general(self):
-        return confd.features_featuremap.get()
-
-    def update_features_featuremap_general(self, features_featuremap):
-        confd.features_featuremap.update(features_featuremap)
-
-    def get_features_applicationmap_general(self):
-        return confd.features_applicationmap.get()
-
-    def update_features_applicationmap_general(self, features_applicationmap):
-        confd.features_applicationmap.update(features_applicationmap)
