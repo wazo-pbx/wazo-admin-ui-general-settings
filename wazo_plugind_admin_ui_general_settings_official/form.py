@@ -25,11 +25,10 @@ class OptionsForm(BaseForm):
 
 class GeneralSettingsOptionsForm(BaseForm):
     options = FieldList(FormField(OptionsForm))
-    submit = SubmitField(l_('Submit'))
 
 
 class SipGeneralSettingsForm(GeneralSettingsOptionsForm):
-    pass
+    submit = SubmitField(l_('Submit'))
 
 
 class IaxCallnumberlimitsForm(BaseForm):
@@ -38,12 +37,14 @@ class IaxCallnumberlimitsForm(BaseForm):
     limit = StringField(l_('Limit'))
 
 
-class IaxGeneralSettingsForm(GeneralSettingsOptionsForm):
+class IaxGeneralSettingsForm(BaseForm):
+    general = FormField(GeneralSettingsOptionsForm)
     callnumberlimits = FieldList(FormField(IaxCallnumberlimitsForm))
+    submit = SubmitField(l_('Submit'))
 
 
 class SccpGeneralSettingsForm(GeneralSettingsOptionsForm):
-    pass
+    submit = SubmitField(l_('Submit'))
 
 
 class VoicemailZonemessages(BaseForm):
@@ -63,10 +64,14 @@ class VoicemailZonemessages(BaseForm):
     message = StringField(l_('Message'))
 
 
-class VoicemailGeneralSettingsForm(GeneralSettingsOptionsForm):
+class VoicemailGeneralSettingsForm(BaseForm):
+    general = FormField(GeneralSettingsOptionsForm)
     zonemessages = FieldList(FormField(VoicemailZonemessages))
+    submit = SubmitField(l_('Submit'))
 
 
-class FeaturesGeneralSettingsForm(GeneralSettingsOptionsForm):
-    featuremap = FieldList(FormField(OptionsForm))
-    applicationmap = FieldList(FormField(OptionsForm))
+class FeaturesGeneralSettingsForm(BaseForm):
+    general = FormField(GeneralSettingsOptionsForm)
+    featuremap = FormField(GeneralSettingsOptionsForm)
+    applicationmap = FormField(GeneralSettingsOptionsForm)
+    submit = SubmitField(l_('Submit'))

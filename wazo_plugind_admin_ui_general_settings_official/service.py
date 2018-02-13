@@ -17,14 +17,16 @@ class SipGeneralSettingsService(object):
 class IaxGeneralSettingsService(object):
 
     def get(self):
-        resource = confd.iax_general.get()
-        resource['callnumberlimits'] = confd.iax_callnumberlimits.get()['items']
+        resource = {
+            'general': confd.iax_general.get(),
+            'callnumberlimits': confd.iax_callnumberlimits.get()['items']
+        }
         return resource
 
-    def update(self, iax_general):
-        confd.iax_callnumberlimits.update({'items': iax_general['callnumberlimits']})
-        iax_general['ordered_options'] = confd.iax_general.get()['ordered_options']
-        confd.iax_general.update(iax_general)
+    def update(self, resource):
+        confd.iax_callnumberlimits.update({'items': resource['callnumberlimits']})
+        resource['general']['ordered_options'] = confd.iax_general.get()['ordered_options']
+        confd.iax_general.update(resource['general'])
 
 
 class SccpGeneralSettingsService(object):
@@ -39,24 +41,28 @@ class SccpGeneralSettingsService(object):
 class VoicemailGeneralSettingsService(object):
 
     def get(self):
-        resource = confd.voicemail_general.get()
-        resource['zonemessages'] = confd.voicemail_zonemessages.get()['items']
+        resource = {
+            'general': confd.voicemail_general.get(),
+            'zonemessages': confd.voicemail_zonemessages.get()['items']
+        }
         return resource
 
-    def update(self, voicemail_general):
-        confd.voicemail_zonemessages.update({'items': voicemail_general['zonemessages']})
-        confd.voicemail_general.update(voicemail_general)
+    def update(self, resource):
+        confd.voicemail_zonemessages.update({'items': resource['zonemessages']})
+        confd.voicemail_general.update(resource['general'])
 
 
 class FeaturesGeneralSettingsService(object):
 
     def get(self):
-        resource = confd.features_general.get()
-        resource['featuremap'] = confd.features_featuremap.get()['options']
-        resource['applicationmap'] = confd.features_applicationmap.get()['options']
+        resource = {
+            'general': confd.features_general.get(),
+            'featuremap': confd.features_featuremap.get(),
+            'applicationmap': confd.features_applicationmap.get()
+        }
         return resource
 
-    def update(self, features_general):
-        confd.features_featuremap.update({'options': features_general['featuremap']})
-        confd.features_applicationmap.update({'options': features_general['applicationmap']})
-        confd.features_general.update(features_general)
+    def update(self, resource):
+        confd.features_featuremap.update(resource['featuremap'])
+        confd.features_applicationmap.update(resource['applicationmap'])
+        confd.features_general.update(resource['general'])

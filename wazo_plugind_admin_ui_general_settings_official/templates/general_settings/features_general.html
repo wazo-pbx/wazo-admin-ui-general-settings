@@ -30,10 +30,10 @@
                   {% endcall %}
 
                   {% call build_table_body(class_='dynamic-table') %}
-                    {% do form.options.append_entry() %}
-                    {{ _build_option_entry(form.options.pop_entry(), template=True) }}
+                    {% do form.general.options.append_entry() %}
+                    {{ _build_option_entry(form.general.options.pop_entry(), template=True) }}
 
-                    {% for option in form.options %}
+                    {% for option in form.general.options %}
                       {{ _build_option_entry(option) }}
                     {% endfor %}
                   {% endcall %}
@@ -56,10 +56,10 @@
                   {% endcall %}
 
                   {% call build_table_body(class_='dynamic-table') %}
-                    {% do form.featuremap.append_entry() %}
-                    {{ _build_option_entry(form.featuremap.pop_entry(), template=True) }}
+                    {% do form.featuremap.options.append_entry() %}
+                    {{ _build_option_entry(form.featuremap.options.pop_entry(), template=True) }}
 
-                    {% for option in form.featuremap %}
+                    {% for option in form.featuremap.options %}
                       {{ _build_option_entry(option) }}
                     {% endfor %}
                   {% endcall %}
@@ -82,10 +82,10 @@
                   {% endcall %}
 
                   {% call build_table_body(class_='dynamic-table') %}
-                    {% do form.applicationmap.append_entry() %}
-                    {{ _build_option_entry(form.applicationmap.pop_entry(), template=True) }}
+                    {% do form.applicationmap.options.append_entry() %}
+                    {{ _build_option_entry(form.applicationmap.options.pop_entry(), template=True) }}
 
-                    {% for option in form.applicationmap %}
+                    {% for option in form.applicationmap.options %}
                       {{ _build_option_entry(option) }}
                     {% endfor %}
                   {% endcall %}
