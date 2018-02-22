@@ -9,7 +9,7 @@
 
       {% call build_form_tabs_box() %}
         {% call build_tabs_navigation() %}
-          {{ add_tab_navigation_item('wazo_default_bridge', _('Default Bridge', active=True)) }}
+          {{ add_tab_navigation_item('wazo_default_bridge', _('Default Bridge'), active=True) }}
           {{ add_tab_navigation_item('wazo_default_user', _('Default User')) }}
         {% endcall %}
 
