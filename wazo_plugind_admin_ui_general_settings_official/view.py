@@ -20,7 +20,8 @@ from .form import (
     IaxGeneralSettingsForm,
     SccpGeneralSettingsForm,
     VoicemailGeneralSettingsForm,
-    FeaturesGeneralSettingsForm
+    FeaturesGeneralSettingsForm,
+    ConfBridgeGeneralSettingsForm
 )
 
 
@@ -158,4 +159,27 @@ class FeaturesGeneralSettingsView(BaseGeneralSettingsView):
         data['general']['options'] = self._map_options_to_resource(data['general']['options'])
         data['featuremap']['options'] = self._map_options_to_resource(data['featuremap']['options'])
         data['applicationmap']['options'] = self._map_options_to_resource(data['applicationmap']['options'])
+        return data
+
+
+class ConfBridgeGeneralSettingsView(BaseGeneralSettingsView):
+    form = ConfBridgeGeneralSettingsForm
+    resource = 'confbridge_general_settings'
+    settings = 'confbridge_general'
+
+    @classy_menu_item('.advanced.confbridge_general_settings', l_('ConfBridge General Settings'), order=9,
+                      icon="asterisk")
+    def index(self, form=None):
+        return super().index(form)
+
+    def _map_resources_to_form(self, resource):
+        resource['wazo_default_user']['options'] = self._build_options(resource['wazo_default_user']['options'])
+        resource['wazo_default_bridge']['options'] = self._build_options(resource['wazo_default_bridge']['options'])
+        form = self.form(data=resource)
+        return form
+
+    def _map_form_to_resources(self, form, form_id=None):
+        data = form.to_dict()
+        data['wazo_default_user']['options'] = self._map_options_to_resource(data['wazo_default_user']['options'])
+        data['wazo_default_bridge']['options'] = self._map_options_to_resource(data['wazo_default_bridge']['options'])
         return data

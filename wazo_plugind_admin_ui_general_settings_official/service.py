@@ -66,3 +66,17 @@ class FeaturesGeneralSettingsService(object):
         confd.features_featuremap.update(resource['featuremap'])
         confd.features_applicationmap.update(resource['applicationmap'])
         confd.features_general.update(resource['general'])
+
+
+class ConfBridgeGeneralSettingsService(object):
+
+    def get(self):
+        resource = {
+            'wazo_default_user': confd.confbridge_wazo_default_user.get(),
+            'wazo_default_bridge': confd.confbridge_wazo_default_bridge.get()
+        }
+        return resource
+
+    def update(self, resource):
+        confd.confbridge_wazo_default_user.update(resource['wazo_default_user'])
+        confd.confbridge_wazo_default_bridge.update(resource['wazo_default_bridge'])

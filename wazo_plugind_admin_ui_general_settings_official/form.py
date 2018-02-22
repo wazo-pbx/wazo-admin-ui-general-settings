@@ -75,3 +75,9 @@ class FeaturesGeneralSettingsForm(BaseForm):
     featuremap = FormField(GeneralSettingsOptionsForm)
     applicationmap = FormField(GeneralSettingsOptionsForm)
     submit = SubmitField(l_('Submit'))
+
+
+class ConfBridgeGeneralSettingsForm(BaseForm):
+    wazo_default_bridge = FormField(GeneralSettingsOptionsForm)
+    wazo_default_user = FormField(GeneralSettingsOptionsForm)
+    submit = SubmitField(l_('Submit'))
