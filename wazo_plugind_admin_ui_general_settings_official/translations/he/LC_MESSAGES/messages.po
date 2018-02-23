@@ -1,0 +1,81 @@
+# Translations template for wazo-admin-ui-general-settings.
+# Copyright (C) 2018 The Wazo Authors  (see the AUTHORS file)
+# This file is distributed under the same license as the
+# wazo-admin-ui-general-settings project.
+# Wazo Dev Team <dev@wazo.community>, 2018.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: wazo-admin-ui-general-settings 0.1\n"
+"Report-Msgid-Bugs-To: 'dev@wazo.community'\n"
+"POT-Creation-Date: 2018-02-23 15:27-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language-Team: Hebrew (https://www.transifex.com/wazo/teams/69545/he/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+"Language: he\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: wazo_plugind_admin_ui_general_settings_official/form.py:31
+#: wazo_plugind_admin_ui_general_settings_official/form.py:43
+#: wazo_plugind_admin_ui_general_settings_official/form.py:47
+#: wazo_plugind_admin_ui_general_settings_official/form.py:70
+#: wazo_plugind_admin_ui_general_settings_official/form.py:77
+#: wazo_plugind_admin_ui_general_settings_official/form.py:83
+msgid "Submit"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/form.py:35
+msgid "IP Address"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/form.py:36
+msgid "Netmask"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/form.py:37
+msgid "Limit"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/form.py:51
+msgid "Name"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/form.py:52
+msgid "Timezone"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/form.py:64
+msgid "Message"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/view.py:59
+#, python-format
+msgid "%(resource)s: Resource has been updated"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/view.py:85
+msgid "SIP General Settings"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/view.py:95
+msgid "IAX General Settings"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/view.py:115
+msgid "SCCP General Settings"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/view.py:125
+msgid "Voicemail General Settings"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/view.py:146
+msgid "Features General Settings"
+msgstr ""
+
+#: wazo_plugind_admin_ui_general_settings_official/view.py:170
+msgid "ConfBridge General Settings"
+msgstr ""
