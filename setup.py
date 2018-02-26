@@ -7,7 +7,7 @@ from setuptools import find_packages
 from setuptools import setup
 from setuptools.command.build_py import build_py as _build_py
 
-PROJECT = 'wazo-admin-ui-general-settings'
+PROJECT = 'wazo_admin_ui_general_settings'
 AUTHOR = 'Wazo Authors'
 EMAIL = 'dev@wazo.community'
 
